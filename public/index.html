@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MY APP</title>    
+    <title>MY APP</title> 
 
+    <!-- load maps, angular, ng-map and our app -->
     <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
 
     <script src="/js/angular.js"></script>
@@ -18,8 +19,8 @@
   </head>
   <body ng-app="myApp" ng-controller="mainController as main">
     <div class="map-canvas">
-      <map center="37.853843, -122.278776" zoom="8" style="height: 800px;">
-        <marker ng-repeat='item in main.list' position='{{item.pos}}' title='{{item.title}}'></marker>
+      <map center="37.853843, -122.278776" zoom="10" style="height: 800px;">
+        <marker ng-repeat='item in main.list' position='{{item.lat}}, {{item.lng}}' title='{{item.title}}'></marker>
       </map>
 
     </div>

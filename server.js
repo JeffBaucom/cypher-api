@@ -15,7 +15,7 @@ var port       = process.env.PORT || 8080; //set the port for our app
 //use body parser so we can grab information from POST requests
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // so we can get static files in the dir
 
 //configure our app to handle CORS requests
 app.use(function(req, res, next) {
