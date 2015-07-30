@@ -1,0 +1,26 @@
+CYPHER MOCK UP
+
+Features:
+	-Authentication by Facebook and Gmail
+	-Store Locations with Title, Author, and Date
+	-Retrieve on load, update on move, save on click
+
+
+
+Plan of Work:
+
+
+1. Create Front-end Mock Up
+	-Wire buttons and forms to add markers
+	-Wire event listener to load markers on move
+	-Wire event listener to save markers on click
+2. Configure Database
+	-Design schema
+	-Figure out best practice for querying
+3. Route Back-end
+	-GET and POST routes for locations
+	-Look at possible ways to load markers faster/async
+4. Route Front-end
+	-Make service for sending GETs and POSTs
+5. Add Authentication
+	-Use Passport to facilitate Facebook and Gmail authentication

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MY APP</title>    
+
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+    <script src="/js/angular.js"></script>
+    
+    <script src='/js/ng-map.min.js'></script>
+
+    <script src="/js/app.js"></script>
+
+    <style>
+    .map-canvas { height: 100%; }
+    </style>  
+
+  </head>
+  <body ng-app="myApp" ng-controller="mainController as main">
+    <div class="map-canvas">
+      <map center="37.853843, -122.278776" zoom="8" style="height: 800px;">
+        <marker ng-repeat='item in main.list' position='{{item.pos}}' title='{{item.title}}'></marker>
+      </map>
+
+    </div>
+  </body>
+</html>
