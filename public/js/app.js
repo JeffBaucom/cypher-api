@@ -8,7 +8,7 @@ angular.module('myApp', ['ngMap'])
 	vm.pos = 'Georgia Institute of Technology';
 
 	vm.list = [
-	{pos : '2045 Lockridge Place', title: 'Home'},
+	{pos : '', title: 'Home'},
 	{pos : 'Georgia Institute of Technology', title: 'School'},
 	{pos : 'Univeristy of California, Berkeley', title: 'other school'}];
 
