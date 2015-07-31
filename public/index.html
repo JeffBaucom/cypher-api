@@ -18,6 +18,18 @@
 
   </head>
   <body ng-app="myApp" ng-controller="mainController as main">
+    <div class="panel">
+      <form>
+      <h2>Lat: </h2>
+      <input type="text" ng-model="main.newLat" />
+      <h2>Lang: </h2>
+      <input type="text" ng-model="main.newLng" />
+      <h2>Title: </h2>
+      <input type="text" ng-model="main.newTitle" />
+      <button class="submit" ng-click="main.addMarker()">
+      <h2>Submit</h2></button>
+      </form>
+    </div>
     <div class="map-canvas">
       <map center="37.853843, -122.278776" zoom="10" style="height: 800px;">
         <marker ng-repeat='item in main.list' position='{{item.lat}}, {{item.lng}}' title='{{item.title}}'></marker>
