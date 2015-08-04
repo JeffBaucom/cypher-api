@@ -8,7 +8,7 @@
 
     <script src="/js/angular.js"></script>
     
-    <script src='/js/ng-map.min.js'></script>
+    <script src='/js/ng-map.js'></script>
 
     <script src="/js/app.js"></script>
 
@@ -20,19 +20,24 @@
   <body ng-app="myApp" ng-controller="mainController as main">
     <div class="panel">
       <form>
-      <p>Lat: </p>
-      <input type="text" ng-model="main.newLat" />
-      <p>Lang: </p>
-      <input type="text" ng-model="main.newLng" />
+      <p>Address: </p>
+      <input type="text" ng-model="main.newAddress" />
       <p>Title: </p>
       <input type="text" ng-model="main.newTitle" />
       <button class="submit" ng-click="main.addMarker()">
       <h2>Submit</h2></button>
       </form>
+
     </div>
     <div class="map-canvas">
-      <map center="37.853843, -122.278776" zoom="10" style="height: 800px;">
+      <map center="{{main.center}}" zoom="10" style="height: 800px;">
         <marker ng-repeat='item in main.list' position='{{item.lat}}, {{item.lng}}' title='{{item.title}}'></marker>
+        <marker ng-repeat='item in main.newList' position='{{item.pos}}' title='{{item.title}}'></marker>
+
+
+        <custom-control id="center" position="TOP_LEFT" index="2" on-click="getCenter()">
+           <div style="background-color: white;">Get Center</div>
+        </custom-control>
       </map>
 
     </div>
