@@ -13,7 +13,7 @@ var port       = process.env.PORT || 8080; //set the port for our app
 
 //APP CONFIGURATION ---
 //use body parser so we can grab information from POST requests
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true})); // set body parser to extended for nested JSON
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public'))); // so we can get static files in the dir
 
@@ -49,15 +49,25 @@ apiRouter.get('/', function(req, res) {
 	res.json({ message: 'hooray! welcome to our api!' });
 });
 
+// For routes at /api/events
 apiRouter.route('/events')
 	
 	// create an event (accessed at POST http://localhost:8080/api/events)
 	.post(function(req, res) {
+        if (!req.body) return res.sendStatus(400);
 		// create a new instance of the event model
 		var event = new Event();
 
 		// set the event information (comes from the request)
 		event.name = req.body.name;
+        event.address = req.body.address;
+        event.lat = req.body.lat;
+        event.lng = req.body.lng;
+        event.start = req.body.start;
+        event.end = req.body.end;
+        event.styles = req.body.styles;
+        event.kind = req.body.kind;
+        event.about = req.body.about;
 
 		// save and check for errors
 		event.save(function(err) {
@@ -82,8 +92,62 @@ apiRouter.route('/events')
 			// return the users
 			res.json(events);
 		});
-	})
+	});
 
+// For routes at /api/events/:event_id
+// Routes on a specific event
+apiRouter.route('/events/:event_id')
+
+    // get the event with this id
+    // (GET http://localhost:8080/api/events/:event_id)
+    .get(function(req, res) {
+        // Use our Event model
+        Event.findById(req.params.event_id, function(err, event) {       
+            if (err) { res.send(err)}; 
+            // return the event
+            res.json(event);
+        });
+     })
+    
+    // put the event with this id
+    // (PUT http://localhost:8080/api/events/:event_id)
+    .put(function(req, res) {
+        // Use our Event model
+        Event.findById(req.params.event_id, function(err, event) {       
+            
+            if (err) { res.send(err)}; 
+            
+            if (req.body.name) event.name = req.body.name;
+            if (req.body.address) event.address = req.body.address; 
+            if (req.body.lat) event.lat  = req.body.lat; 
+            if (req.body.lng) event.lng = req.body.lng; 
+            if (req.body.start) event.start = req.body.start; 
+            if (req.body.end) event.end = req.body.end; 
+            if (req.body.styles) event.styles = req.body.styles; 
+            if (req.body.kind) event.kind = req.body.kind; 
+            if (req.body.about) event.about = req.body.about; 
+       
+            event.save(function(err) {
+                if (err) res.send(err);
+
+                //return success message
+                res.json({ message: 'Event updated'});
+            });
+        });
+    })
+    
+    // delete the event with this id
+    // (GET http://localhost:8080/api/events/:event_id)
+    .delete(function(req, res) {
+        // Use our Event model
+        Event.remove({
+            _id: req.params.event_id
+        }, function(err, event) {
+            if (err) return res.send(err);
+
+            res.json({ message: 'Event deleted' });
+        });
+     });
 
 // more routes for our API will happen here
 

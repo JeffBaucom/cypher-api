@@ -24,3 +24,39 @@ Plan of Work:
 	-Make service for sending GETs and POSTs
 5. Add Authentication
 	-Use Passport to facilitate Facebook and Gmail authentication
+
+
+
+
+
+
+
+Event Data
+
+	Title: String
+	Location:
+		Address: optional, String
+		Coords: required, Array/String
+	Time:
+		First Day: Required, Date
+		Time: Required, String
+		Repeating: 
+			Days: Optional, String Array
+			Repetitions: Required, String
+				-Monthly
+				-Bi-weekly
+				-Weekly
+	Description:
+		Styles: Required, String Array
+		Cover/Admission: Required, Number
+		Type: Required, String
+			-Open Session
+			-Class/Workshop
+			-Battle
+			-Show
+		Blurb: optional, String
+
+
+
+
+
